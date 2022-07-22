@@ -4,5 +4,6 @@ exports.install = function() {
 
 function view_index() {
 	var self = this;
-	self.plain('Hello World!');
+
+	self.plain('Hello World!', {'Connection': 'close'});
 }

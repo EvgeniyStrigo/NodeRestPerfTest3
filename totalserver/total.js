@@ -1,3 +1,7 @@
+// last update 8 month ago
+// 4,1k stars
+// does not has types definitions
+
 // ===================================================
 // IMPORTANT: only for production
 // total.js - web application framework for node.js

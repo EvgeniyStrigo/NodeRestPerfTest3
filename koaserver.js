@@ -1,9 +1,16 @@
-var koa = require('koa');
-var app = new koa();
+'use strict'
+// last update 9 month ago
+// 32,9k stars
+// has types definitions @types/koa
 
-app.use(function *(){
-	this.set('Connection', 'close');
-  this.body = 'Hello World!';
+const Koa = require('koa');
+const app = new Koa();
+
+app.use(ctx => {
+    ctx.set('Connection', 'close');
+    ctx.body = 'Hello World!';
 });
 
-app.listen(8000);
+app.listen(8000, () => {
+    console.log(`Koa Server listening on port: ${8000}`);
+})

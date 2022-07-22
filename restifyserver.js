@@ -1,14 +1,20 @@
-var restify = require('restify');
+'use strict'
+// last update 5 month ago
+// has types definitions @types/restify
+// not working out-of-the-box
+// not support Node v18
 
-function respond(req, res, next) {
-	res.set('Connection', 'close');
-  res.send('Hello World!');
-  next();
-}
+const restify = require('restify');
 
-var server = restify.createServer();
+const server = restify.createServer();
 server.get('/', respond);
 
-server.listen(8000, function() {
-  console.log('%s listening at %s', server.name, server.url);
+function respond(req, res, next) {
+    res.set('Connection', 'close');
+    res.send('Hello World!');
+    next();
+}
+
+server.listen(8080, function () {
+    console.log('restify %s listening at %s', server.name, server.url);
 });

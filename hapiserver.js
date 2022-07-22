@@ -1,28 +1,35 @@
 'use strict';
+// last update 3 month ago
+// 13,9k stars
+// has types definitions @types/hapi__hapi
 
-const Hapi = require('hapi');
+const Hapi = require('@hapi/hapi');
 
-// Create a server with a host and port
-const server = new Hapi.Server();
-server.connection({ 
-    host: 'localhost', 
-    port: 8000 
+const init = async () => {
+
+    const server = Hapi.server({
+        port: 8000,
+        host: 'localhost'
+    });
+
+    server.route({
+        method: 'GET',
+        path: '/',
+        handler: (request, h) => {
+            const response = h.response('Hello World!');
+            response.header('Connection','close');
+            return response;
+        }
+    });
+
+    await server.start();
+    console.log('Hapi Server running on %s', server.info.uri);
+};
+
+process.on('unhandledRejection', (err) => {
+
+    console.log(err);
+    process.exit(1);
 });
 
-// Add the route
-server.route({
-    method: 'GET',
-    path:'/', 
-    handler: function (request, reply) {
-        return reply('Hello World!').header('Connection', 'close');
-    }
-});
-
-// Start the server
-server.start((err) => {
-
-    if (err) {
-        throw err;
-    }
-    console.log('Server running at:', server.info.uri);
-});
+init();
